@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" th:fragment="histories">
+                    <div class="row" th:unless="${histories == null}" th:each="history : ${histories}">
+                        <div class = "col-md-12">
+                            <div class="row">
+                                <div class="col-md-12" th:text="|${history.user.name} ${history.action} - ${history.creationString}|">                                 
+                                </div>
+                            </div>
+                            <div class="row" th:unless="${history.details == null}">
+                                <div class="col-md-4"><b>Field</b></div>                             
+                                <div class="col-md-4"><b>Before</b></div>
+                                <div class="col-md-4"><b>After</b></div>
+                            </div>
+                            <div class="row" th:unless="${history.details == null}" th:each="detail : ${history.details}">
+                                <div class="col-md-4" th:text="${detail.field}">field</div>                             
+                                <div class="col-md-4" th:text="${detail.beforeValue}">before</div>
+                                <div class="col-md-4" th:text="${detail.afterValue}">after</div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <footer th:replace="../fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <body>
+
+<div class="modal fade" id="logoModal" tabindex="-1" role="dialog" th:fragment="avatarForm">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Select a Project Avatar</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="avatar">Avatar<span class="red">*</span></label>
+                </div>              
+                <div class="col-md-10">
+                  <input type="file" class="file-loading" name="avatar" id="avatar" />
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                </div>              
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

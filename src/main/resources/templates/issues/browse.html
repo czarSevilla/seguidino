@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container-fluid">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>T</th>
+                            <th>Key</th>
+                            <th>Summary</th>
+                            <th>Assignee</th>
+                            <th>Reporter</th>
+                            <th>P</th>
+                            <th>Status</th>
+                            <th>Resolution</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Resolved</th>
+                            <th>Component</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="issue : ${issues}">
+                            <td><span class="glyphicon" th:classappend="${issue.issueType.icon}" th:title="${issue.issueType.name}"></span></td>
+                            <td><a href="" th:href="@{'/issues/show/' + ${issue.keyIssue}}" th:text="${issue.keyIssue}"></a></td>
+                            <td th:text="${issue.subject}"></td>
+                            <td th:text="${issue.assignee.name}"></td>
+                            <td th:text="${issue.author.name}"></td>
+                            <td><span class="glyphicon" th:classappend="${issue.issuePriority.icon}" th:title="${issue.issuePriority.name}"></span></td>
+                            <td><span class="glyphicon" th:classappend="${issue.issueStatus.icon}"></span>&nbsp;<span th:text="${issue.issueStatus.name}"></span></td>
+                            <td th:text="${issue.issueResolution != null ? issue.issueResolution.name : 'Unresolved'}"></td>
+                            <td th:text="${#dates.format(issue.creation, 'dd/MMM/yy')}"></td>
+                            <td th:unless="${issue.modification == null}" th:text="${#dates.format(issue.modification, 'dd/MMM/yy')}"></td>
+                            <td th:unless="${issue.modification != null}">&nbsp;</td>
+                            <td th:unless="${issue.resolved == null}" th:text="${#dates.format(issue.resolved, 'dd/MMM/yy')}"></td>
+                            <td th:unless="${issue.resolved != null}">&nbsp;</td>                            
+                            <td>
+                               <table>
+                                <tr th:each="comp : ${issue.projectComponents}"><td th:text="${comp.name}">comp</td></tr>
+                               </table> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer th:replace="fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

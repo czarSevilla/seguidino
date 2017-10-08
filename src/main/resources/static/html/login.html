@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">Seguidino</h3>
+</div>
+<form name="loginForm" ng-submit="login(credentials)" novalidate promise-btn>
+    <div class="alert alert-danger" ng-show="failLogin" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <strong>Error</strong> Nombre de usuario o contrase&ntilde;a inv&aacute;lidos.
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="nombre" class="control-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" ng-model="credentials.nombre"/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" class="form-control" name="password" id="password" ng-model="credentials.password"/>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Login</button>
+    </div>
+</form>

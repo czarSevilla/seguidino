@@ -1,0 +1,21 @@
+<div ng-controller="ListarProyectoController">
+    <table class="table table-hover table-condensed table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Proyecto</th>
+                <th>Clave</th>
+                <th>L&iacute;der</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in proyectos">
+                <td><a ng-bind="p.claveProyecto" ui-sref="proyectos.detail({claveProyecto: p.claveProyecto})"></a></td>
+                <td ng-bind="p.nombre"></td>
+                <td ng-bind="p.lider"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" class="pagination-sm pagination-right pagination-mini block-pagination" boundary-links="true" ng-change="loadPage()" first-text="Primera" last-text="Última" next-text="Siguiente" previous-text="Anterior"></ul>
+    </div>
+</div>

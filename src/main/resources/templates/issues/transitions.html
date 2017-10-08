@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" th:fragment="transitions">
+                    <div class="row" th:unless="${transitions == null}">
+                        <div class = "col-md-12">
+                            <div class="row">
+                                <div class="col-md-4"><b>User</b></div>                             
+                                <div class="col-md-4"><b>Status</b></div>
+                                <div class="col-md-4"><b>Date</b></div>
+                            </div>
+                            <div class="row" th:each="transition : ${transitions}">
+                                <div class="col-md-4" th:text="${transition.user.name}">field</div>                             
+                                <div class="col-md-4" th:text="${transition.issueStatus.name}">before</div>
+                                <div class="col-md-4" th:text="${transition.creationString}">after</div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <footer th:replace="../fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

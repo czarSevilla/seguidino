@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/layout/header :: common_header"></head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12" >
+							
+							
+								<div class="panel panel-default" th:fragment="gridPanel(grid)">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											<b th:text="${grid.title}">Status Summary</b>
+										</h3>
+									</div>
+									<table class="table">
+										<thead>
+											<tr>
+												<th th:each="serie : ${grid.series}" th:text="${serie.title}">Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="label, idx : ${grid.series[0].values}">
+												<td th:text="${label}">In Progress</td>
+												<td th:text="${grid.series[1].values[idx.index]}">2</td>
+												<td th:unless="${#lists.size(grid.series) == 2}">
+													<div class="progress">
+														<div class="progress-bar" role="progressbar"
+															th:attr="aria-valuenow='${grid.series[2].values[idx.index]}'" aria-valuemin="0" aria-valuemax="100"
+															style="min-width: 2em;" th:styleappend="'width:' + ${grid.series[2].values[idx.index]} + '%;'" th:text="${grid.series[2].values[idx.index]} + '%'">6%</div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+
+
+
+	       </div>
+		</div>
+	</div>
+    <footer th:replace="fragments/layout/header :: common_footer"></footer>
+</body>
+</html>

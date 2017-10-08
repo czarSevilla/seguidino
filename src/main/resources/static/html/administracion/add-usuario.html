@@ -1,0 +1,35 @@
+<div class="container-fluid" ng-controller="AgregarUsuariosController">
+    <ol class="breadcrumb">
+      <li><a ui-sref="administracion">Administraci&oacute;n</a></li>
+      <li><a ui-sref="usuarios">Usuarios</a></li>
+      <li class="Active">Nuevo</li>
+    </ol>
+    <h3 class="modal-title">Crear usuario</h3>
+    <form id="userForm" name="userForm" ng-submit="doAgregarUsuario(usuario)" promise-btn>
+        <div class="form-group">
+            <label for="username">Nombre de usuario<span class="red">*</span></label>
+            <input type="text" name="username" ng-model="usuario.username" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="pass1">Password<span class="red">*</span></label>
+            <input type="password" name="pass1" ng-model="usuario.pass1" class="form-control"/>
+        </div> 
+        <div class="form-group">
+            <label for="pass2">Verificar password<span class="red">*</span></label>
+            <input type="password" name="pass2" ng-model="usuario.pass2" class="form-control"/>
+        </div> 
+        <div class="form-group">
+            <label for="nombre">Nombre completo<span class="red">*</span></label>
+            <input type="text" name="nombre" ng-model="usuario.nombre" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electr&oacute;nico<span class="red">*</span></label>
+            <input type="text" name="email" ng-model="usuario.email" class="form-control"/>
+        </div>          
+        <div class="form-group">
+            <label for="admin">Administrador </label>
+            <input type="checkbox" name="admin" id="admin" ng-model="usuario.admin" bootstrap-switch />
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Crear</button>
+    </form>
+</div>

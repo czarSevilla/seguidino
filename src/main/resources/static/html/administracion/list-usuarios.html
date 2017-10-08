@@ -1,0 +1,37 @@
+<div ng-controller="ListarUsuariosController">
+    
+    <ol class="breadcrumb">
+      <li><a ui-sref="administracion">Administraci&oacute;n</a></li>
+      <li class="Active">Usuarios</li>
+    </ol>
+    
+    <a ui-sref="newUser">
+        <button type="button" class="btn btn-default pull-right" title="Nuevo usuario" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo usuario</button>
+    </a>
+
+    <table class="table table-hover table-condensed table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Bloqueado</th>
+                <th>Activo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="u in usuarios">
+                <td><a ui-sref="editUser(u.username)" ng-bind="u.username"></a></td>
+                <td ng-bind="u.nombre"></td>
+                <td ng-bind="u.email"></td>
+                <td ng-if="u.admin == true">Administrador</td><td ng-if="u.admin == false">Usuario</td>
+                <td ng-bind="u.bloqueado"></td>
+                <td ng-bind="u.activo"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" class="pagination-sm pagination-right pagination-mini block-pagination" boundary-links="true" ng-change="loadPage()" first-text="Primera" last-text="Última" next-text="Siguiente" previous-text="Anterior"></ul>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container-fluid" ng-controller="CrearProyectoController">
+   <h3>Crear proyecto</h3>
+    <form id="formProyecto" name="formProyecto" ng-submit="crearProyecto()">
+        <div class="form-group">
+            <label for="tipo" class="control-label">Tipo de proyecto</label>
+            <select id="tipo" name="tipo" class="form-control" ng-model="proyecto.tipo">
+                <option value="1">Bug Tracking</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nombre" class="control-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" ng-model="proyecto.nombre"/>
+        </div>
+        <div class="form-group">
+            <label for="clave" class="control-label">Clave</label>
+            <input type="text" class="form-control" name="clave" id="clave" ng-model="proyecto.clave"/>
+        </div>
+        <div class="form-group">
+            <label for="lider" class="control-label">Lider</label>
+            <input type="text" class="form-control" name="lider" id="lider" ng-model="proyecto.lider"/>
+        </div>
+        <button type="submit" class="btn btn-primary right">Crear</button>
+    </form>
+</div>

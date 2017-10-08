@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:fragment="common_header">
+        <title>Seguidino</title>
+        <link rel="stylesheet" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="../../css/octicons.min.css" th:href="@{/css/octicons.min.css}" />
+        <link rel="stylesheet" href="../../css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" href="../../css/bootstrap-select.min.css" th:href="@{/css/bootstrap-select.min.css}" />
+        <link rel="stylesheet" href="../../css/fileinput.min.css" th:href="@{/css/fileinput.min.css}" />
+        <link rel="stylesheet" href="../../css/seguidino.css" th:href="@{/css/seguidino.css}" />
+    </head>
+    <body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container"></div>
+        </div>
+        <footer th:fragment="common_footer">
+            <script src="../../js/jquery.min.js" th:src="@{/js/jquery.min.js}" ></script>
+	        <script src="../../js/jquery.min-ui.js" th:src="@{/js/jquery-ui.min.js}" ></script>        
+	        <script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" ></script>
+	        <script src="../../js/bootstrap-select.min.js" th:src="@{/js/bootstrap-select.min.js}" ></script>
+	        <script src="../../js/fileinput.min.js" th:src="@{/js/fileinput.min.js}" ></script>
+	        <script src="../../js/seguidino.js" th:src="@{/js/seguidino.js}" ></script>
+        </footer>
+    </body>
+</html>

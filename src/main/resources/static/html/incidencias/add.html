@@ -1,0 +1,70 @@
+<div class="container-fluid" ng-controller="AgregarIncidenciaController">
+    <h3 class="modal-title">Crear Incidencia</h3>
+    <form id="issueForm" name="issueForm" ng-submit="doAgregarIncidencia(incidencia)" promise-btn>
+        <div class="form-group">
+            <label for="proyecto">Proyecto<span class="red">*</span></label>
+            <ui-select ng-model="incidencia.proyecto.claveProyecto" on-select="updateCombosPorProyecto()" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Seleccione el proyecto">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="p.claveProyecto as p in proyectos">{{p.nombre}}</ui-select-choices>
+            </ui-select>
+        </div>    
+        <div class="form-group">
+            <label for="tipo">Tipo<span class="red">*</span></label>
+            <ui-select ng-model="incidencia.tipoItemProyecto.idTipoItemProyecto" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Seleccione el tipo de incidencia"><span class="glyphicon {{$select.selected.icono}}"></span> {{$select.selected.valor}}</ui-select-match>
+                <ui-select-choices repeat="t.clave as t in tipos">
+                    <span class="glyphicon {{t.icono}}"></span> {{t.valor}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="resumen">Resumen<span class="red">*</span></label>
+            <input type="text" ng-model="incidencia.resumen" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="prioridad">Prioridad<span class="red">*</span></label>            
+            <ui-select ng-model="incidencia.prioridadItemProyecto.idPrioridadItemProyecto" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Seleccione la prioridad de la incidencia"><span class="glyphicon {{$select.selected.icono}}"></span> {{$select.selected.valor}}</ui-select-match>
+                <ui-select-choices repeat="p.clave as p in prioridades">
+                    <span class="glyphicon {{p.icono}}"></span> {{p.valor}}
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="componente">Componente</label>
+            <ui-select ng-model="incidencia.parteProyecto.idParteProyecto" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Seleccione el componente (opcional)">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="c.idParteProyecto as c in componentes">{{c.nombre}}</ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="version">Versi&oacute;n</label>
+            <ui-select ng-model="incidencia.versionProyecto.idVersionProyecto" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Seleccione la versi&oacute;n (opcional)">{{$select.selected.nombre}}</ui-select-match>
+                <ui-select-choices repeat="v.idVersionProyecto as v in versiones">{{v.nombre}}</ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="asignatario">Asignar a</label>
+            <ui-select ng-model="incidencia.apoderado.username" append-to-body="true" search-enabled="false">
+                <ui-select-match placeholder="Asignar a (opcional)">{{$select.selected.valor}}</ui-select-match>
+                <ui-select-choices repeat="u.clave as u in asignatarios">{{u.valor}}</ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="vencimiento">Fecha de vencimiento</label>
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" clear-text="Limpiar" close-text="Cerrar" current-text="Hoy"  ng-model="incidencia.vencimiento" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="false" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripci&oacute;n<span class="red">*</span></label>
+            <trix-editor angular-trix ng-model="incidencia.descripcion"></trix-editor>
+        </div>
+        <button type="submit" class="btn btn-primary right">Crear</button>
+    </form>
+</div>
+

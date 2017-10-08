@@ -1,0 +1,42 @@
+<div ng-controller="ConsultaIncidenciasController">
+    <div class="col-sm-4" >
+        <div class="list-group">
+            <a href="#" class="list-group-item" ng-repeat="issue in incidencias" ng-click="show(issue)"><span class="glyphicon {{issue.iconoTipo}}"></span> {{issue.clave}} {{issue.resumen}}</a>
+        </div>
+    </div>    
+    <div class="col-sm-8">
+        {{currentIssue.proyecto}} / {{currentIssue.clave}}<br/>
+        {{currentIssue.resumen}}
+    </div>
+    <div class="col-sm-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">Detalles</div>
+            <div class="panel-body">
+                <div class="col-sm-8">
+                    <label>Tipo</label>
+                    <span class="label label-primary"><span class="glyphicon {{currentIssue.iconoTipo}}"></span> {{currentIssue.tipo}}</span>
+                </div>
+                <div class="col-sm-8">
+                    <label>Estatus</label>
+                    <span>{{currentIssue.estatus}}</span>
+                </div>
+                <div class="col-sm-8">
+                    <label>Prioridad</label>
+                    <span><span class="glyphicon {{currentIssue.iconoPrioridad}}"></span> {{currentIssue.prioridad}}</span>
+                </div>
+                <div class="col-sm-8">
+                    <label>Resoluci&oacute;n</label>
+                    <span>{{currentIssue.resolucion}}</span>
+                </div>                          
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Personas</div>
+            <div class="panel-body">
+                                        
+            </div>
+        </div>
+    </div>    
+</div>

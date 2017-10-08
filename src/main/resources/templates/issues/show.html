@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container-fluid">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="h4"><a href="" th:href="@{|/projects/${project.keyProject}|}" th:text="${project.name}">Proyecto X</a></span> / <span class="h5" th:text="${issue.keyIssue}">key</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11">
+                        <span class="editable" id="editableSubject">
+                        	<span class="editable-label">
+	        					<span class="h2 label-field" th:text="${issue.subject}">Campo editable</span>
+	        				</span>
+	        				<span class="editable-field">
+	        					<input type="text" class="form-control" name="subject" th:value="${issue.subject}"/>
+	        					<span class="editable-panel">
+	        						<button class="btn btn-default btn-xs" th:onclick="|SEGUIDINO.editarCampo('editableSubject', ${issue.idIssue});|"><span class="glyphicon glyphicon-ok"></span></button>
+	        						<button class="btn btn-default btn-xs" onclick="SEGUIDINO.resetEditable();"><span class="glyphicon glyphicon-remove"></span></button>
+	        					</span>        					
+	        				</span>
+	        				<span class="editable-icon editable-inputfield">
+	        					<span class="glyphicon glyphicon-pencil"></span>
+	        				</span>          					 
+	        			</span>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-default btn-sm" th:onclick="|SEGUIDINO.showIssue('${prevKeyIssue}');|"><span class="glyphicon glyphicon-triangle-left"></span></button>
+                        <button type="button" class="btn btn-default btn-sm" th:onclick="|SEGUIDINO.showIssue('${nextKeyIssue}');|"><span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button id="btnShowComment" type="button" class="btn btn-default navbar-btn" th:onclick="|SEGUIDINO.showAddComment(${issue.idIssue});|"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comment</button>
+                        <button id="btnStartProgress" type="button" class="btn btn-default navbar-btn" th:style="${#sets.contains(transitions, 'IN_PROGRESS')? '' : 'display:none;'}" th:onclick="|SEGUIDINO.startProgress(${issue.idIssue});|">Start progress</button>
+                        <button id="btnStopProgress" type="button" class="btn btn-default navbar-btn" th:style="${#sets.contains(transitions, 'OPEN')? '' : 'display:none;'}" th:onclick="|SEGUIDINO.stopProgress(${issue.idIssue});|">Stop progress</button>
+                        <button id="btnResolveIssue" type="button" class="btn btn-default navbar-btn" th:style="${#sets.contains(transitions, 'RESOLVED')? '' : 'display:none;'}" th:onclick="|SEGUIDINO.showResolveForm(${issue.idIssue}, ${project.idProject});|">Resolve Issue</button>
+                        <button id="btnCloseIssue" type="button" class="btn btn-default navbar-btn" th:style="${#sets.contains(transitions, 'CLOSED')? '' : 'display:none;'}" th:onclick="|SEGUIDINO.showCloseForm(${issue.idIssue}, ${project.idProject});|">Close Issue</button>
+                        <button id="btnReopenIssue" type="button" class="btn btn-default navbar-btn" th:style="${#sets.contains(transitions, 'REOPEN')? '' : 'display:none;'}" th:onclick="|SEGUIDINO.showReopenForm(${issue.idIssue}, ${project.idProject});|">Reopen Issue</button>
+                    </div>
+                    <div class="col-md-6">&nbsp;</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row"><div class="col-md-12"><b>Details</b></div></div>
+                        <div class="row">
+                            <div class="col-md-2">Type:</div>
+		                    <div class="col-md-4">
+		                      <span class="editable" id="editableIssueType">
+		        				<span class="icon-combo glyphicon" th:classappend="${issue.issueType.icon}" th:attr="data-icon=|${issue.issueType.icon}|"></span>&nbsp;<span class="label-field" th:text="${issue.issueType.name}">Campo editable</span>
+		        				<span class="editable-field">
+		        					<select data-name="type" th:field="${issue.issueType.idIssueType}" class="form-control selectpicker">
+		        						<option th:each="itype : ${issueTypes}" th:value="${itype.idIssueType}" th:text="${itype.name}" th:attr="data-icon=|${itype.icon}|">value</option>
+		        					</select>
+		        					<span class="editable-panel">
+		        						<button class="btn btn-default btn-xs" th:onclick="|SEGUIDINO.editarCombo('editableIssueType', ${issue.idIssue});|"><span class="glyphicon glyphicon-ok"></span></button>
+		        						<button class="btn btn-default btn-xs" onclick="SEGUIDINO.resetEditable();"><span class="glyphicon glyphicon-remove"></span></button>
+		        					</span>        					
+		        				</span>
+		        				<span class="editable-icon editable-combobox">
+		        					<span class="glyphicon glyphicon-pencil"></span>
+		        				</span>          					 
+		        			</span>
+		                     </div>
+		                    <div class="col-md-2">Status:</div>
+		                    <div class="col-md-4" id="div-status"><span class="glyphicon" th:classappend="${issue.issueStatus.icon}"></span>&nbsp;<span th:text="${issue.issueStatus.name}"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Priority:</div>
+		                    <div class="col-md-4">
+		                      
+		                      <span class="editable" id="editableIssuePriority">
+		        				<span class="icon-combo glyphicon" th:classappend="${issue.issuePriority.icon}"  th:attr="data-icon=|${issue.issueType.icon}|"></span>&nbsp;<span class="label-field" th:text="${issue.issuePriority.name}">Campo editable</span>
+		        				<span class="editable-field">
+		        					<select data-name="priority" th:field="${issue.issuePriority.idIssuePriority}" class="form-control selectpicker">
+		        						<option th:each="ipriority : ${issuePriorities}" th:value="${ipriority.idIssuePriority}" th:text="${ipriority.name}" th:attr="data-icon=|${ipriority.icon}|">value</option>
+		        					</select>
+		        					<span class="editable-panel">
+		        						<button class="btn btn-default btn-xs" th:onclick="|SEGUIDINO.editarCombo('editableIssuePriority', ${issue.idIssue});|"><span class="glyphicon glyphicon-ok"></span></button>
+		        						<button class="btn btn-default btn-xs" onclick="SEGUIDINO.resetEditable();"><span class="glyphicon glyphicon-remove"></span></button>
+		        					</span>        					
+		        				</span>
+		        				<span class="editable-icon editable-combobox">
+		        					<span class="glyphicon glyphicon-pencil"></span>
+		        				</span>          					 
+		        			</span>
+		                      
+		                    </div>
+		                    <div class="col-md-2">Resolution:</div>
+		                    <div class="col-md-4"><span th:text="${issue.issueResolution != null ? issue.issueResolution.name : 'Unresolved'}"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Components:</div>
+                            <div class="col-md-10" onmouseover="SEGUIDINO.showEditableIcon(this);" onmouseout="SEGUIDINO.hideEditableIcon(this);">
+                                <div class="row" th:unless="${issue.projectComponents == null}" th:each="component : ${issue.projectComponents}">
+                                    <div class="col-md-12" th:text="${component.name}">component</div>
+                                </div>
+                                &nbsp;&nbsp;<span class="glyphicon glyphicon-pencil editable-icon" style="display:none;cursor:pointer;"></span>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-md-12"><b>Description</b></div></div>
+                        <div class="row"><div class="col-md-12" th:text="${issue.description}">&nbsp;</div></div>
+                        <div class="row"><div class="col-md-12">&nbsp;</div></div>
+                        <div class="row">
+		                    <div class="col-md-12">
+		                        <ul class="nav nav-tabs">
+		                          <li id="tabComments" role="presentation" class="tab-issue active"><a href="#" th:onclick="|javascript:SEGUIDINO.showComments(${issue.idIssue});|">Comments</a></li>
+		                          <li id="tabHistory" role="presentation" class="tab-issue"><a href="#" th:onclick="|javascript:SEGUIDINO.showHistory(${issue.idIssue});|">History</a></li>
+		                          <li id="tabActivity" role="presentation" class="tab-issue"><a href="#" th:onclick="|javascript:SEGUIDINO.showActivity(${issue.idIssue});|">Activity</a></li>
+		                          <li id="tabTransitions" role="presentation" class="tab-issue"><a href="#" th:onclick="|javascript:SEGUIDINO.showTransitions(${issue.idIssue});|">Transitions</a></li>
+		                        </ul>                                              
+		                    </div>
+		                </div>
+		                <div id="divAddComment" class="row tab-issue-detail" style="display:none;">
+		                    <div class="col-md-1">&nbsp;</div>
+		                    <div class="col-md-10">
+                                <form id="formAddComment">
+                                   <label for="text" class="control-label">Comment</label>
+                                   <textarea id="txtComment" name="text" class="form-control" rows="3"></textarea>
+                                   <input type="hidden" name="idIssue" id="idIssue" />
+                                   <input type="hidden" id="sec-token" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                </form>
+                                <div class="row"><div class="col-md-12">&nbsp;</div></div>
+                                <div class="row">
+                                   <div class="col-md-9">&nbsp;</div>
+                                   <div class="col-md-1">
+                                       <button type="button" class="btn btn-primary" onclick="SEGUIDINO.addComment();">Add</button>
+                                   </div>
+                                   <div class="col-md-1">
+                                       <button type="button" class="btn btn-default" onclick="SEGUIDINO.cancelAddComment();">Cancel</button>
+                                   </div>
+                                   <div class="col-md-1">&nbsp;</div>
+                                </div>
+		                    </div>
+		                    <div class="col-md-1">&nbsp;</div>
+		                </div>
+		                <div class="row"><div class="col-md-12">&nbsp;</div></div>
+		                <div id="listComments" class="row tab-issue-detail">
+		                  <div class="col-md-1">&nbsp;</div>
+		                  <div class="col-md-10">
+		                      <div class="row" id="listComments" th:replace="issues/comments :: comments">
+		                      </div>
+		                  </div>
+		                  <div class="col-md-1">&nbsp;</div>
+		                </div>
+		                <div id="histories" class="row tab-issue-detail">
+		                  
+		                </div>
+		                <div id="activities" class="row tab-issue-detail">
+                          
+                        </div>
+                        <div id="transitions" class="row tab-issue-detail">
+                          
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row"><div class="col-md-12"><b>People</b></div></div>
+                        <div class="row">
+                            <div class="col-md-3">Assignee:</div>
+                            <div class="col-md-9"><img th:src="${issue.assignee.avatar}" width="16" height="16" />&nbsp;<span th:text="${issue.assignee.name}"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Reporter:</div>
+                            <div class="col-md-9"><img th:src="${issue.author.avatar}" width="16" height="16" />&nbsp;<span th:text="${issue.author.name}"></span></div>
+                        </div>
+                        <div class="row"><div class="col-md-12"><b>Dates</b></div></div>
+                        <div class="row">
+                            <div class="col-md-3">Created:</div>
+                            <div class="col-md-9"><span th:text="${creation}"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">Updated:</div>
+                            <div class="col-md-9"><span th:text="${modification}"></span></div>
+                        </div>
+                        <div class="row" th:unless="${issue.resolved == null}">
+                            <div class="col-md-3">Resolved:</div>
+                            <div class="col-md-9"><span th:text="${resolved}"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="resolveDivForm" title="Resolve Issue" style="display:none;">
+            <div class="container-fluid">
+	        <form id="resolveForm" class="form-horizontal">
+	            <div class="form-group">
+	                <label for="idIssueResolution" class="control-label">Resolution*</label>
+	                <select id="resolution-select" name="issueResolution.idIssueResolution" class="form-control selectpicker">
+	                </select>
+	            </div>
+	            <div class="form-group">
+	                <label for="assignee.idUser" class="control-label">Assignee*</label>
+	                <select id="resolve-assignee-select" name="assignee.idUser" class="selectpicker form-control">
+	                
+	                </select>
+	            </div>
+	            <div class="form-group">
+                    <label for="text" class="control-label">Comment</label>
+                    <textarea id="txtComment" name="text" class="form-control" rows="3"></textarea>                    
+                </div>	     
+                <input type="hidden" name="idIssue" th:value="${issue.idIssue}" />
+	            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	        </form>
+	        </div>
+	    </div>
+	    <div id="reopenDivForm" title="Reopen Issue" style="display:none;">
+	       <div class="container-fluid">
+            <form id="reopenForm" class="form-horizontal">
+                <div class="form-group">
+                    <label for="assignee.idUser" class="control-label">Assignee*</label>
+                    <select id="reopen-assignee-select" name="assignee.idUser" class="selectpicker form-control">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="text" class="control-label">Comment</label>
+                    <textarea id="txtComment" name="text" class="form-control" rows="3"></textarea>                    
+                </div>       
+                <input type="hidden" name="idIssue" th:value="${issue.idIssue}" />
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            </form>
+            </div>
+        </div>
+        <input type="hidden" id="focusable" />
+        <footer th:replace="fragments/layout/header :: common_footer"></footer>       
+    </body>
+</html>

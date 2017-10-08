@@ -1,0 +1,72 @@
+<div ng-controller="DetalleProyectoController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{proyecto.nombre}}</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                        <label>Clave</label>
+                            <span class="label label-primary">{{proyecto.claveProyecto}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>L&iacute;der</label>
+                            <span>{{proyecto.lider}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <label>Estatus</label>
+                            <span>Abierto</span>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Componentes
+                    <button type="button" class="btn btn-default btn-xs pull-right" aria-label="Agregar" title="Agregar componente" ng-click="agregarComponente()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li ng-repeat="componente in componentes"><span ng-bind="componente.nombre"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Versiones
+                    <button type="button" class="btn btn-default btn-xs pull-right" aria-label="Agregar" title="Agregar versi&oacute;n" ng-click="agregarVersion()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li ng-repeat="version in versiones"><span ng-bind="version.nombre"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Miembros
+                    <button type="button" class="btn btn-default btn-xs pull-right" aria-label="Agregar" title="Agregar miembro" ng-click="agregarMiembro()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li ng-repeat="m in miembros"><span ng-bind="m.nombre"></span> - <span ng-bind="m.descripcion"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

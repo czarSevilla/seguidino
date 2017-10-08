@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h3 class="modal-title">Agregar miembro</h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="nombre" class="control-label">Nombre</label>
+        <select class="form-control" ng-model="miembro.nombre">
+            <option value="">-- Selecciona un usuario --</option>
+            <option value="czar">Czar</option>
+        </select>
+        <label for="rol" class="control-label">Rol</label>
+        <select class="form-control" ng-model="miembro.rol">
+            <option value="">-- Selecciona un rol --</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Lider">Lider</option>
+        </select>
+    </div>    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary pull-right" ng-click="doAgregarMiembro(miembro)">Agregar</button>
+</div>

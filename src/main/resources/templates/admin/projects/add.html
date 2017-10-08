@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <body>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" th:fragment="addForm">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add a new project</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="name">Name<span class="red">*</span></label>
+                </div>              
+                <div class="col-md-10">
+                  <input type="text" class="form-control" name="name" />
+                </div>              
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="key">Key<span class="red">*</span></label>
+                </div>              
+                <div class="col-md-10">
+                  <input type="text" class="form-control" name="key" />
+                </div>              
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label for="key">Project Lead<span class="red">*</span></label>
+                </div>              
+                <div class="col-md-10">
+                  <select class="form-control selectpicker" name="lead">
+                    <option th:each="u : ${users}" th:attribute="|value='${u.idUser}'|" th:text="${u.name}"></option>
+                  </select>
+                </div>              
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>        
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>

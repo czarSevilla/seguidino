@@ -1,0 +1,19 @@
+.red {color:#a30d00;}
+.green {color:green;}
+.blue {color:#0453db;}
+.yellow {color:#fc9f00;}
+.closed, .closed:hover {text-decoration:line-through;}
+.activity-item{padding:5px;border-bottom: 1px solid #ddd;}
+.activity-item > div {font-size:small;}
+.activity-item > div > div > div > blockquote {font-size:small; background-color: #cce6ff; border:none; margin-bottom: 0.5em;}
+.activity-item .activity-avatar {padding:0.5em; margin: 0.5em 0;}
+.activity-target {margin: 0.5em 0;}
+.nav-tabs > li.active:focus {text-decoration: none;}
+.editable{border:1px solid white; padding:4px 0 4px 4px; border-radius: 4px;}
+.editable:hover{border-color:#ccc;}
+.editable:hover .editable-icon{background-color: #ccc; padding:4px; cursor:pointer; visibility: visible;}
+.editable-icon{background-color: #ccc; padding:4px; cursor:pointer; visibility: hidden;}
+.editable-field{display:none;}
+.onEdition:hover{border-color:white;}
+.onEdition:hover .editable-icon{visibility:hidden;}
+.editable-panel{float:right; background-color: #ccc; padding: 4px; border-radius: 4px;}

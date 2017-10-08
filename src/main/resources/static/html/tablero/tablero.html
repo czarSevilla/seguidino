@@ -1,0 +1,23 @@
+<div ng-controller="TableroController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Chart
+        </div>
+
+        <div class="panel-body">
+            <canvas id="line" class="chart chart-line" data="chart1.data" labels="chart1.labels" legend="true" click="onClick" series="chart1.series"></canvas>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Doughnut Chart
+        </div>
+
+        <div class="panel-body">
+            <canvas id="doughnut" class="chart chart-doughnut"
+              chart-data="chart2.data" chart-labels="chart2.labels">
+            </canvas>
+        </div>
+    </div>
+</div>

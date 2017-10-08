@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container" th:fragment="activities">
+                <div class="row activity-item" th:each="activity : ${activities}">
+                    <div class="col-md-1 activity-avatar">
+                        <img src="/img/useravatar.png" th:src="@{/img/useravatar.png}" />
+                    </div>
+                    <div class="col-md-11">
+				        <div class="row">
+                            <div class="col-md-12 activity-target">
+                                <a href="#"><b th:text="${activity.user.name}">Cesar Sevilla</b></a><span th:text="${activity.action}"></span><a href="#" th:href="@{|/issues/show/${activity.issue.keyIssue}|}"><span th:class="${activity.issue.issueStatus.idIssueStatus eq 3 ? 'closed' : ''}" th:text="${activity.issue.keyIssue}">VUPDA-50</span> - <span th:text="${activity.issue.subject}">An issue</span></a>
+                            </div>
+				        </div>
+				        <div class="row">
+				            <div class="col-md-12">
+				                <blockquote th:unless="${activity.detail == null}" th:text="${activity.detail}">Revision: 250543 Author: jcano</blockquote>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="glyphicon" th:classappend="${activity.issue.issueType.icon}"></span>&nbsp;&nbsp;&nbsp;<span th:text="${activity.creationString}">4 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

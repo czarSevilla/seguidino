@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+ <head th:replace="fragments/layout/header :: common_header"></head>
+
+<body>
+	<div class="container-fluid" th:fragment="overview">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="row">
+					<div class="col-md-12">&nbsp;</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="nav nav-pills nav-stacked">							
+							<li role="presentation" class="active"><a href="#">Summary</a></li>
+							<li role="presentation"><a href="#" th:onclick="|javascript:SEGUIDINO.showProjectTab('issues', '${keyProject}');|">Issues</a></li>
+							<li role="presentation"><a href="#">Popular Issues</a></li>
+							<li role="presentation"><a href="#" th:href="@{|/projects/${keyProject}/overview/components|}">Components</a></li>
+							<li role="presentation"><a href="#">Labels</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10" style="border-left: 1px solid #ccc;">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>Summary <span th:text="${keyProject}">key</span></h3>
+					</div>
+				</div>
+				<div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+		                    <div class="col-md-12">
+		                        <img alt="createdVsResolved"
+		                        src="/img/project.png" width="500" height="300"
+		                        th:src="|/stats/${keyProject}/createdVsResolved|"  />
+		                    </div>
+		                </div>
+                    </div>
+                    <div class="col-md-6" th:include="activities/list :: activities">
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/layout/header :: common_footer"></footer>
+</body>
+</html>

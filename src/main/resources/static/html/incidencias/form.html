@@ -1,0 +1,63 @@
+<form ng-submit="doAgregarIncidencia(incidencia)" promise-btn>
+    <div class="modal-header">
+        <h3 class="modal-title">Crear Incidencia</h3>
+    </div>
+    <div class="modal-body form-incidencia">
+        <div class="form-group">
+            <label for="proyecto">Proyecto</label>
+            <select ng-model="incidencia.proyecto.claveProyecto" class="form-control" ng-change="updateCombosPorProyecto()">
+                <option value="">-- Seleccione el proyecto --</option>
+                <option ng-repeat="p in proyectos" value="{{p.claveProyecto}}" ng-bind="p.nombre"></option>
+            </select>
+        </div>    
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <select ng-model="incidencia.tipoItemProyecto.idTipoItemProyecto" class="form-control">
+                <option value="">-- Seleccione el tipo de incidencia --</option>
+                <option ng-repeat="t in tipos" value="{{t.clave}}" ng-bind="t.valor"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="resumen">Resumen</label>
+            <input type="text" ng-model="incidencia.resumen" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="prioridad">Prioridad</label>
+            <select ng-model="incidencia.prioridadItemProyecto.idPrioridadItemProyecto" class="form-control">
+                <option value="">-- Seleccione la prioridad de la incidencia --</option>
+                <option ng-repeat="p in prioridades" value="{{p.clave}}" ng-bind="p.valor"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="componente">Componente</label>
+            <select ng-model="incidencia.parteProyecto.idParteProyecto" class="form-control">
+                <option value="">Ningno</option>
+                <option ng-repeat="c in componentes" value="{{c.idParteProyecto}}" ng-bind="c.nombre"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="version">Versi&oacute;n</label>
+            <select ng-model="incidencia.versionProyecto.idVersionProyecto" class="form-control">
+                <option value="">Ninguna</option>
+                <option ng-repeat="v in versiones" value="{{v.idVersionProyecto}}" ng-bind="v.nombre"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="asignatario">Asignar a</label>
+            <select ng-model="incidencia.apoderado.username" class="form-control">
+                <option value="">Sin asignar</option>
+                <option ng-repeat="u in asignatarios" value="{{u.clave}}" ng-bind="u.valor"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vencimiento">Fecha de vencimiento</label>
+            <input type="date" class="form-control" ng-model="incidencia.vencimiento" />
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripci&oacute;n</label>
+            <textarea name="" id="" cols="30" rows="10" class="form-control" ng-model="incidencia.descripcion"></textarea>
+        </div>
+     <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Crear</button>
+    </div>
+</form>

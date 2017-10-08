@@ -1,0 +1,36 @@
+<div ng-controller="ConsultaIncidenciasController">
+    <p></p>
+    <table class="table table-hover table-condensed table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Clave</th>
+                <th>Resumen</th>
+                <th>Asignado a</th>
+                <th>Reportado por</th>
+                <th>Prioridad</th>
+                <th>Estatus</th>
+                <th>Resoluci&oacute;n</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Vencimiento</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issue in incidencias">
+                <td><span class="glyphicon {{issue.iconoTipo}}" title="{{issue.tipo}}"></span></td>
+                <td ng-bind="issue.clave"></td>
+                <td ng-bind="issue.resumen"></td>
+                <td ng-bind="issue.asignado"></td>
+                <td ng-bind="issue.reportado"></td>
+                <td><span class="glyphicon {{issue.iconoPrioridad}}" title="{{issue.prioridad}}"></span></td>
+                <td ng-bind="issue.estatus"></td>
+                <td ng-bind="issue.resolucion"></td>
+                <td ng-bind="issue.creacion"></td>
+                <td ng-bind="issue.modificacion"></td>
+                <td ng-bind="issue.vencimiento"></td>
+            </tr>
+        </tbody>
+    </table> 
+</div>

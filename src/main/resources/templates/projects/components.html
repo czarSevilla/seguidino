@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/layout/header :: common_header"></head>
+<body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">                      
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: right; vertical-align: middle;">
+                                <img th:src="@{/img/project-avatar.svg}" height="48" width="48" alt="logo" /> 
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="h2" th:text="${project.name}">VENTANILLA UNICA PRUEBAS DE ACEPTACION</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                               <span>Key:</span>&nbsp;<span th:text="${project.keyProject}">VUPDA</span>&nbsp;&nbsp;&nbsp;
+                               <span>Lead:</span>&nbsp;<span th:text="${project.manager.name}">Cesar Sevilla</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><div class="col-md-12">&nbsp;</div></div>
+                </div>
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                      <li id="tab_overview" role="presentation" class="active"><a href="#">Overview</a></li>
+                      <li id="tab_administration" role="presentation"><a href="#" th:href="@{|/projects/${keyProject}/administration|}">Administration</a></li>
+                    </ul>
+                </div>
+                <div class="row" id="contentTab">
+	<div class="container-fluid" th:fragment="issues">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="row">
+					<div class="col-md-12">&nbsp;</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="nav nav-pills nav-stacked">
+							<li role="presentation"><a href="#" th:href="@{|/projects/${keyProject}/overview/summary|}">Summary</a></li>
+							<li role="presentation"><a href="#" th:href="@{|/projects/${keyProject}/overview/issues|}">Issues</a></li>
+							<li role="presentation"><a href="#">Popular Issues</a></li>
+							<li role="presentation" class="active"><a href="#">Components</a></li>
+							<li role="presentation"><a href="#">Labels</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10" style="border-left: 1px solid #ccc;">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>Components</h3>
+					</div>
+				</div>
+				<div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+				<div class="row">
+                    <div class="col-md-4"><b>Component</b></div>
+                    <div class="col-md-4"><b>Lead</b></div>
+                    <div class="col-md-4"><b>Description</b></div>
+                </div>
+				<div class="row" th:each="component : ${components}">
+				    <div class="col-md-4"><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;<span th:text="${component.name}"></span></div>
+				    <div class="col-md-4" th:text="${component.lead.name}"></div>
+				    <div class="col-md-4" th:text="${component.description}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+            </div>
+        </div>
+        <footer th:replace="fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

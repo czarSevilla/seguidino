@@ -1,0 +1,20 @@
+<form ng-submit="doAgregarVersion(claveProyecto, version)" promise-btn>
+    <div class="modal-header">
+        <h3 class="modal-title">Agregar versi&oacute;n</h3>
+    </div>
+    <div class="alert alert-danger" ng-show="failSaveVersion" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <strong>Error</strong> <span ng-bind="failMessage"></span>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="version" class="control-label">Versi&oacute;n</label>
+            <input type="text" name="version" ng-model="version" class="form-control"/>
+            <input type="hidden" name="claveProyecto" ng-model="claveProyecto" />
+        </div>    
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary pull-right" >Agregar</button>
+    </div>
+</form>

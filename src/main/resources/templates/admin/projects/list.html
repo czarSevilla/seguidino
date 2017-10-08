@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="fragments/layout/header :: common_header"></head>
+    <body>
+        <div class="container-fluid" id="mainContainer">
+            <div id="header"></div>
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-10">
+                            <span class="h3">Project list</span>
+                            <div id="add-project-form" th:replace="admin/projects/add :: addForm"></div>
+                            <div id="edit-project-form" th:replace="admin/projects/edit :: editForm"></div>
+                            <div id="logo-project-form" th:replace="admin/projects/avatar :: avatarForm"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>Add Project</span></button>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Key</th>
+                                        <th>URL</th>
+                                        <th>Project Lead</th>
+                                        <th>Default Assignee</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="proj : ${projects}" th:id="|proj-item-${proj.idProject}|">
+                                        <td>
+                                            <img class="project-avatar" th:src="${proj.avatar}" height="16" width="16" />
+                                            &nbsp;
+                                            <span th:text="${proj.name}" class="proj-item-name">name</span> 
+                                        </td>
+                                        <td th:text="${proj.keyProject}"></td>
+                                        <td th:unless="${proj.url == null}" th:text="${proj.url}"></td>
+                                        <td th:unless="${proj.url != null}" >No URL</td>
+                                        <td th:text="${proj.manager.name}"></td>
+                                        <td>Project Lead</td>
+                                        <td>
+                                            <input type="hidden" name="url" th:value="${proj.url}" />
+                                            <input type="hidden" name="description" th:value="${proj.description}" />
+                                            <a href="#" th:onclick="|SEGUIDINO.showEditProject(${proj.idProject});|">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/layout/header :: common_footer"></footer>
+    </body>
+</html>

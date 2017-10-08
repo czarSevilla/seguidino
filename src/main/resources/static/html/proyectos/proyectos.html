@@ -1,0 +1,14 @@
+<div class="container-fluid" ng-controller="ProyectosController">
+    <div class="row">
+        <div class="col-sm-2 span2">
+            <aside-menu id="menuProyectos" side="left" class="list-group">
+                    <a ng-class="submenu == 'listarProyecto' ? 'list-group-item active' : 'list-group-item'" ui-sref="proyectos.list">Listar proyecto</a>
+                    <a ng-class="submenu == 'crearProyecto' ? 'list-group-item active' : 'list-group-item'" ui-sref="proyectos.add">Crear proyecto</a>
+                    <a ng-repeat="p in proyectosRecientes" ng-class="submenu == 'detalleProyecto' + '{{p.claveProyecto}}' ? 'list-group-item active' : 'list-group-item'" ui-sref="proyectos.detail({claveProyecto: p.claveProyecto})">{{p.nombre}}</a>
+                    <a ng-class="submenu == 'buscarProyecto' ? 'list-group-item active' : 'list-group-item'" ui-sref="proyectos.add4">Buscar proyecto</a>
+            </aside-menu>
+        </div>
+        <div class="col-sm-10 span10" ui-view>
+        </div>
+    </div>
+</div>
